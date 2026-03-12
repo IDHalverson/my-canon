@@ -1,0 +1,15 @@
+import "./main.js";
+import "./components/common/v1/search-input.js";
+import "./components/pages/search-page.js";
+import "./components/utility/initializer-component.js";
+import "./components/utility/toast-handler.js";
+import "./context/ToastContextImpl.js";
+import "./context/ThemeContextImpl.js";
+import "./context/FeatureFlagsContextImpl.js";
+import "./components/common/v1/toast-message.js";
+import "./components/page-modules/video-list.js";
+import "./components/common/v1/search-button.js";
+import "./context/UserSelectionsContextImpl.js";
+import "./components/common/v1/video-item.js";
+import "./components/pages/bookmarks-page.js";
+import "./context/BookmarksContextImpl.js";

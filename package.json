@@ -1,0 +1,41 @@
+{
+  "name": "my-canon",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "The canonical video library builder.",
+  "keywords": [
+    "my-canon",
+    "YouTube",
+    "library"
+  ],
+  "author": "Ian Halverson",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IDHalverson/my-canon"
+  },
+  "scripts": {
+    "build-watch": "onchange \"src/**/*\" \"!dist/**\" -- sh -c 'echo \"Building...\" && rm -r dist/ && tsc && mkdir -p dist/public && cp -a src/public/. dist/public/ && echo \"Built successfully.\"'",
+    "prettier-watch": "onchange \"src/**/*.{js,ts,json,css,html}\" \"!dist/**\" -- prettier --write --ignore-unknown {{changed}}",
+    "eslint-watch": "onchange \"src/**/*.{js,ts}\" \"!dist/**\" -- eslint {{changed}}",
+    "serve": "es-dev-server --app-index index.html --node-resolve --watch --open"
+  },
+  "dependencies": {
+    "@lit/context": "^1.1.6",
+    "@lit/task": "^1.0.3",
+    "@typescript-eslint/eslint-plugin": "^8.57.0",
+    "@typescript-eslint/parser": "^8.57.0",
+    "lit": "^3.3.2",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "es-dev-server": "^2.1.0",
+    "eslint": "^10.0.3",
+    "eslint-plugin-lit": "^2.2.1",
+    "eslint-plugin-wc": "^3.1.0",
+    "globals": "^17.4.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.57.0"
+  }
+}
