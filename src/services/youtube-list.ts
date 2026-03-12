@@ -1,7 +1,7 @@
-import { LitElement } from "lit";
+import { LitElement } from 'lit';
 
-import { API_KEY } from "../constants";
-import { ToastPublicMethods } from "../context/ToastContext";
+import { API_KEY } from '../apikey.js';
+import { ToastPublicMethods } from '../context/ToastContext';
 
 const YOUTUBE_LIST_URL = "https://www.googleapis.com/youtube/v3/videos";
 
