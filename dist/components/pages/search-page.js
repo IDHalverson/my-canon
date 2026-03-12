@@ -10,6 +10,7 @@ import { repeat } from "lit/directives/repeat.js";
 import { consume } from "@lit/context";
 import { Task } from "@lit/task";
 import { universalStyles } from "../../common-styles";
+import { toastMethodsContext, } from "../../context/ToastContext";
 import { SortChoice, userSelectionsContext, UserSelectionsKeys, userSelectionsMethodsContext, } from "../../context/UserSelectionsContext";
 import { userSelectionsSearchTask, } from "../../services/youtube-search.js";
 const NAME = "search-page";
@@ -165,13 +166,17 @@ let SearchPage = class SearchPage extends LitElement {
                     : html `<video-list ._items=${videoResponse?.items}></video-list>`;
             }),
             error: (e) => html `<div class="bump-down" role="error" aria-label="Error message">
-            Error: ${e}
+            ${e}
           </div>`,
         })}
       <video-list></video-list>
     `;
     }
 };
+__decorate([
+    consume({ context: toastMethodsContext }),
+    property({ attribute: false })
+], SearchPage.prototype, "_toastMethods", void 0);
 __decorate([
     consume({ context: userSelectionsMethodsContext }),
     property({ attribute: false })

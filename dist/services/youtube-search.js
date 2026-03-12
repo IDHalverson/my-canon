@@ -1,4 +1,5 @@
-import { API_KEY, MAXIMUM_VIDEO_RESULTS } from "../constants";
+import { API_KEY } from "../apikey";
+import { MAXIMUM_VIDEO_RESULTS } from "../constants";
 import { INITIAL_USER_SELECTIONS, SortChoice, UserSelectionsKeys, } from "../context/UserSelectionsContext";
 const YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search";
 export var YoutubeSearchOrderEnum;
@@ -26,12 +27,11 @@ export const userSelectionsSearchTask = async (component, [searchTerm, sortChoic
     });
     if (!response.ok) {
         const data = await response.json();
-        component._toastMethods?.dispatchToast({
-            text: `Error occurred during search: ${response.status} - ${data?.error?.message ??
-                response.statusText ??
-                "An unknown error occurred."}`,
-        });
-        return;
+        const message = `Error occurred during search: ${response.status} - ${data?.error?.message ??
+            response.statusText ??
+            "An unknown error occurred."}`;
+        component._toastMethods?.dispatchToast({ text: message });
+        throw new Error(message);
     }
     const resp = (await response.json());
     // Filter these out for now because they cause bugs

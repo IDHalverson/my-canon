@@ -12,6 +12,10 @@ import {
   BookmarksPublicMethods,
 } from "../../context/BookmarksContext";
 import {
+  toastMethodsContext,
+  ToastPublicMethods,
+} from "../../context/ToastContext";
+import {
   getVideoListTask,
   YoutubeListResponse,
 } from "../../services/youtube-list.js";
@@ -20,6 +24,10 @@ const NAME = "bookmarks-page";
 
 @customElement(NAME)
 export class BookmarksPage extends LitElement {
+  @consume({ context: toastMethodsContext })
+  @property({ attribute: false })
+  _toastMethods?: ToastPublicMethods;
+
   @consume({ context: bookmarksContext, subscribe: true })
   @property()
   private _bookmarks?: Bookmarks;
@@ -106,7 +114,7 @@ export class BookmarksPage extends LitElement {
             ? html`<div class="bump-down">No Bookmarks.</div>`
             : html`<video-list ._items=${videoResponse?.items}></video-list>`;
         }) as (v: unknown) => void,
-        error: (e) => html`<div class="bump-down">Error: ${e}</div>`,
+        error: (e) => html`<div class="bump-down">${e}</div>`,
       })}
       <video-list></video-list>
     `;

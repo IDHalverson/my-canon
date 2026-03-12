@@ -10,6 +10,7 @@ import { consume } from "@lit/context";
 import { Task } from "@lit/task";
 import { buttonStyles, universalStyles } from "../../common-styles";
 import { bookmarksContext, bookmarksMethodsContext, } from "../../context/BookmarksContext";
+import { toastMethodsContext, } from "../../context/ToastContext";
 import { getVideoListTask, } from "../../services/youtube-list.js";
 const NAME = "bookmarks-page";
 let BookmarksPage = class BookmarksPage extends LitElement {
@@ -86,12 +87,16 @@ let BookmarksPage = class BookmarksPage extends LitElement {
                     ? html `<div class="bump-down">No Bookmarks.</div>`
                     : html `<video-list ._items=${videoResponse?.items}></video-list>`;
             }),
-            error: (e) => html `<div class="bump-down">Error: ${e}</div>`,
+            error: (e) => html `<div class="bump-down">${e}</div>`,
         })}
       <video-list></video-list>
     `;
     }
 };
+__decorate([
+    consume({ context: toastMethodsContext }),
+    property({ attribute: false })
+], BookmarksPage.prototype, "_toastMethods", void 0);
 __decorate([
     consume({ context: bookmarksContext, subscribe: true }),
     property()

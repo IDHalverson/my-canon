@@ -1,4 +1,4 @@
-import { API_KEY } from "../constants";
+import { API_KEY } from "../apikey.js";
 const YOUTUBE_LIST_URL = "https://www.googleapis.com/youtube/v3/videos";
 export const getVideoListTask = async (component, [videoIds], signal) => {
     if (!videoIds.length)
@@ -14,12 +14,11 @@ export const getVideoListTask = async (component, [videoIds], signal) => {
     });
     if (!response.ok) {
         const data = await response.json();
-        component._toastMethods?.dispatchToast({
-            text: `Error occurred getting video statistics: ${response.status} - ${data?.error?.message ??
-                response.statusText ??
-                "An unknown error occurred."}`,
-        });
-        return;
+        const message = `Error occurred getting video statistics: ${response.status} - ${data?.error?.message ??
+            response.statusText ??
+            "An unknown error occurred."}`;
+        component._toastMethods?.dispatchToast({ text: message });
+        throw new Error(message);
     }
     const responseParsed = (await response.json());
     const responseModified = {

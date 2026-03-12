@@ -7,6 +7,10 @@ import { Task } from "@lit/task";
 
 import { universalStyles } from "../../common-styles";
 import {
+  toastMethodsContext,
+  ToastPublicMethods,
+} from "../../context/ToastContext";
+import {
   SortChoice,
   UserSelections,
   userSelectionsContext,
@@ -22,6 +26,10 @@ import {
 const NAME = "search-page";
 @customElement(NAME)
 export class SearchPage extends LitElement {
+  @consume({ context: toastMethodsContext })
+  @property({ attribute: false })
+  _toastMethods?: ToastPublicMethods;
+
   @consume({ context: userSelectionsMethodsContext })
   @property({ attribute: false })
   private _userSelectionsMethods?: UserSelectionsPublicMethods;
@@ -206,7 +214,7 @@ export class SearchPage extends LitElement {
         }) as (v: unknown) => void,
         error: (e) =>
           html`<div class="bump-down" role="error" aria-label="Error message">
-            Error: ${e}
+            ${e}
           </div>`,
       })}
       <video-list></video-list>
